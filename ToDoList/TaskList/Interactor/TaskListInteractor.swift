@@ -12,30 +12,43 @@ class TaskListInteractor: TaskListInteractorProtocol {
     private var tasks: [Task] = []
 
     func fetchTasks() {
-        // Добавление тестовых данных
-        tasks = [
-            Task(id: UUID(), title: "Купить продукты", description: "Купить хлеб, молоко и сыр", dateCreated: Date(), isCompleted: false),
-            Task(id: UUID(), title: "Написать отчёт", description: "Написать отчёт по проекту для клиента", dateCreated: Date(), isCompleted: false),
-            Task(id: UUID(), title: "Позвонить в банк", description: "Узнать информацию о кредите", dateCreated: Date(), isCompleted: true)
-        ]
-
-        presenter?.didFetchTasks(tasks)
+        // Выполнение загрузки задач на фоне
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            // Эмуляция загрузки данных, например, из базы данных
+            self?.presenter?.didFetchTasks(self?.tasks ?? [])
+        }
     }
 
     func addTask(_ task: Task) {
-        tasks.append(task)
-        presenter?.didUpdateTasks(tasks)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.tasks.append(task)
+
+            // Возвращение на главный поток для обновления UI
+            DispatchQueue.main.async {
+                self?.presenter?.didUpdateTasks(self?.tasks ?? [])
+            }
+        }
     }
 
     func updateTask(_ task: Task) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index] = task
-            presenter?.didUpdateTasks(tasks)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            if let index = self?.tasks.firstIndex(where: { $0.id == task.id }) {
+                self?.tasks[index] = task
+
+                DispatchQueue.main.async {
+                    self?.presenter?.didUpdateTasks(self?.tasks ?? [])
+                }
+            }
         }
     }
 
     func deleteTask(_ task: Task) {
-        tasks.removeAll { $0.id == task.id }
-        presenter?.didUpdateTasks(tasks)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.tasks.removeAll { $0.id == task.id }
+
+            DispatchQueue.main.async {
+                self?.presenter?.didUpdateTasks(self?.tasks ?? [])
+            }
+        }
     }
 }

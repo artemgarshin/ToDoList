@@ -17,7 +17,7 @@ class TaskListPresenter: TaskListPresenterProtocol {
     }
 
     func didSelectTask(_ task: Task) {
-        // Логика выбора задачи, например, переход к деталям задачи
+        router.navigateToTaskDetail(with: task)
     }
 
     func didTapAddTask(title: String, description: String) {
@@ -28,9 +28,12 @@ class TaskListPresenter: TaskListPresenterProtocol {
     func didTapEditTask(_ task: Task) {
         interactor.updateTask(task)
     }
-
     func didTapDeleteTask(_ task: Task) {
         interactor.deleteTask(task)
+    }
+    
+    func didTapAddTaskButton() {
+        router.navigateToAddTask()
     }
 }
 

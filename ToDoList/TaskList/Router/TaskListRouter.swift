@@ -9,17 +9,22 @@ import UIKit
 
 class TaskListRouter: TaskListRouterProtocol {
     weak var viewController: UIViewController?
+    var interactor: TaskListInteractorProtocol?
 
     func navigateToTaskDetail(with task: Task) {
-//        // Создайте и настройте контроллер для деталей задачи
-//        let taskDetailViewController = TaskDetailViewController()
-//        taskDetailViewController.task = task
-//        viewController?.navigationController?.pushViewController(taskDetailViewController, animated: true)
+        guard let interactor = interactor else { return }
+        let addTaskViewController = AddTaskModuleBuilder.build(with: interactor)
+        if var addTaskVC = addTaskViewController as? AddTaskViewController {
+            addTaskVC.taskToEdit = task
+        }
+        viewController?.navigationController?.pushViewController(addTaskViewController, animated: true)
     }
 
+
+
     func navigateToAddTask() {
-//        // Создайте и настройте контроллер для добавления новой задачи
-//        let addTaskViewController = AddTaskViewController()
-//        viewController?.navigationController?.pushViewController(addTaskViewController, animated: true)
+        guard let interactor = interactor else { return }
+        let addTaskViewController = AddTaskModuleBuilder.build(with: interactor)
+        viewController?.navigationController?.pushViewController(addTaskViewController, animated: true)
     }
 }

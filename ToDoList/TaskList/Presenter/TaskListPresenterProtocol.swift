@@ -11,4 +11,5 @@ protocol TaskListPresenterProtocol: AnyObject {
     func didTapAddTask(title: String, description: String)
     func didTapEditTask(_ task: Task)
     func didTapDeleteTask(_ task: Task)
+    func didTapAddTaskButton()
 }

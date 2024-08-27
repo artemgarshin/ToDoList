@@ -19,22 +19,24 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
     }
 
     private func setupUI() {
-        // Установка цвета фона для основного view
         view.backgroundColor = .white
+        title = "Tasks"
 
-        // Добавление UITableView на основное view
+        // Добавление кнопки "Добавить"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTaskTapped))
+
         view.addSubview(tableView)
-        
-        // Настройка UITableView
         tableView.dataSource = self
         tableView.delegate = self
-        
-        // Установка цвета фона для UITableView
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
         tableView.backgroundColor = .white
-        
-        // Настройка констрейнтов или фреймов для tableView (если это еще не сделано)
         tableView.frame = view.bounds
     }
+
+    @objc private func addTaskTapped() {
+        presenter.didTapAddTaskButton()
+    }
+    
     func showTasks(_ tasks: [Task]) {
         self.tasks = tasks
         tableView.reloadData()
@@ -70,5 +72,12 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let task = tasks[indexPath.row]
         presenter.didSelectTask(task)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let task = tasks[indexPath.row]
+            presenter.didTapDeleteTask(task)
+        }
     }
 }

@@ -26,6 +26,11 @@
 		0FFCF9942C7D167300146494 /* TaskListRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9932C7D167300146494 /* TaskListRouterProtocol.swift */; };
 		0FFCF9962C7D168B00146494 /* TaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9952C7D168B00146494 /* TaskListRouter.swift */; };
 		0FFCF9992C7D171100146494 /* TaskListModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9982C7D171100146494 /* TaskListModuleBuilder.swift */; };
+		0FFCF99F2C7DD72900146494 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF99E2C7DD72900146494 /* AddTaskViewController.swift */; };
+		0FFCF9A12C7DD74300146494 /* AddTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9A02C7DD74300146494 /* AddTaskPresenter.swift */; };
+		0FFCF9A32C7DD75800146494 /* AddTaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9A22C7DD75800146494 /* AddTaskInteractor.swift */; };
+		0FFCF9A52C7DD77600146494 /* AddTaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9A42C7DD77600146494 /* AddTaskRouter.swift */; };
+		0FFCF9A72C7DD79500146494 /* AddTaskModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9A62C7DD79500146494 /* AddTaskModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,11 @@
 		0FFCF9932C7D167300146494 /* TaskListRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouterProtocol.swift; sourceTree = "<group>"; };
 		0FFCF9952C7D168B00146494 /* TaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouter.swift; sourceTree = "<group>"; };
 		0FFCF9982C7D171100146494 /* TaskListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModuleBuilder.swift; sourceTree = "<group>"; };
+		0FFCF99E2C7DD72900146494 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		0FFCF9A02C7DD74300146494 /* AddTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskPresenter.swift; sourceTree = "<group>"; };
+		0FFCF9A22C7DD75800146494 /* AddTaskInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskInteractor.swift; sourceTree = "<group>"; };
+		0FFCF9A42C7DD77600146494 /* AddTaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskRouter.swift; sourceTree = "<group>"; };
+		0FFCF9A62C7DD79500146494 /* AddTaskModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +129,8 @@
 		0FFCF94C2C7D12E100146494 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF99D2C7DD71400146494 /* New Group */,
 				0FFCF94D2C7D12E100146494 /* AppDelegate.swift */,
-				0FFCF9982C7D171100146494 /* TaskListModuleBuilder.swift */,
 				0FFCF94F2C7D12E100146494 /* SceneDelegate.swift */,
 				0FFCF99B2C7D19ED00146494 /* TaskList */,
 				0FFCF99C2C7D1A1C00146494 /* AddTask */,
@@ -197,6 +207,7 @@
 		0FFCF99B2C7D19ED00146494 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF9982C7D171100146494 /* TaskListModuleBuilder.swift */,
 				0FFCF9862C7D14F300146494 /* Interactor */,
 				0FFCF98D2C7D158800146494 /* Presenter */,
 				0FFCF98E2C7D159400146494 /* Entity */,
@@ -209,8 +220,20 @@
 		0FFCF99C2C7D1A1C00146494 /* AddTask */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF99E2C7DD72900146494 /* AddTaskViewController.swift */,
+				0FFCF9A02C7DD74300146494 /* AddTaskPresenter.swift */,
+				0FFCF9A22C7DD75800146494 /* AddTaskInteractor.swift */,
+				0FFCF9A42C7DD77600146494 /* AddTaskRouter.swift */,
+				0FFCF9A62C7DD79500146494 /* AddTaskModuleBuilder.swift */,
 			);
 			path = AddTask;
+			sourceTree = "<group>";
+		};
+		0FFCF99D2C7DD71400146494 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,8 +370,13 @@
 				0FFCF98C2C7D156700146494 /* TaskListPresenter.swift in Sources */,
 				0FFCF94E2C7D12E100146494 /* AppDelegate.swift in Sources */,
 				0FFCF9942C7D167300146494 /* TaskListRouterProtocol.swift in Sources */,
+				0FFCF99F2C7DD72900146494 /* AddTaskViewController.swift in Sources */,
+				0FFCF9A32C7DD75800146494 /* AddTaskInteractor.swift in Sources */,
+				0FFCF9A12C7DD74300146494 /* AddTaskPresenter.swift in Sources */,
+				0FFCF9A72C7DD79500146494 /* AddTaskModuleBuilder.swift in Sources */,
 				0FFCF98A2C7D153D00146494 /* TaskListPresenterProtocol.swift in Sources */,
 				0FFCF9922C7D160D00146494 /* TaskListViewController.swift in Sources */,
+				0FFCF9A52C7DD77600146494 /* AddTaskRouter.swift in Sources */,
 				0FFCF9902C7D15F700146494 /* TaskListViewProtocol.swift in Sources */,
 				0FFCF9992C7D171100146494 /* TaskListModuleBuilder.swift in Sources */,
 				0FFCF9502C7D12E100146494 /* SceneDelegate.swift in Sources */,

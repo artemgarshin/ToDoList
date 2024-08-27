@@ -20,6 +20,7 @@ class TaskListModuleBuilder {
         presenter.router = router
         interactor.presenter = presenter
         router.viewController = view
+        router.interactor = interactor
 
         return view
     }
