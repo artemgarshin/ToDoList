@@ -18,7 +18,7 @@ class TaskListRouter: TaskListRouterProtocol {
             addTaskVC.taskToEdit = task
         }
         
-        // Презентация модального экрана
+        
         addTaskViewController.modalPresentationStyle = .formSheet
         viewController?.present(addTaskViewController, animated: true, completion: nil)
     }
@@ -27,7 +27,7 @@ class TaskListRouter: TaskListRouterProtocol {
         guard let interactor = interactor else { return }
         let addTaskViewController = AddTaskModuleBuilder.build(with: interactor)
         
-        // Презентация модального экрана
+        
         addTaskViewController.modalPresentationStyle = .formSheet
         viewController?.present(addTaskViewController, animated: true, completion: nil)
     }

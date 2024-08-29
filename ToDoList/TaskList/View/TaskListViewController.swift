@@ -63,11 +63,9 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
         // Переключение статуса выполнения
         task.isCompleted.toggle()
         
-        // Обновление задачи в массиве и перезагрузка таблицы
         tasks[taskIndex] = task
         tableView.reloadData()
-        
-        // Обновление задачи через Interactor
+
         presenter.didTapEditTask(task)
     }
 }
