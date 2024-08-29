@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         
-        // Используем билдер для создания VIPER-модуля TaskList
+        
         let taskListViewController = TaskListModuleBuilder.build()
         
         window.rootViewController = UINavigationController(rootViewController: taskListViewController)

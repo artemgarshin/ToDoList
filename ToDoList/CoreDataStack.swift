@@ -11,7 +11,7 @@ class CoreDataStack {
     static let shared = CoreDataStack()
 
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "ToDoList") // Имя должно совпадать с именем вашего .xcdatamodeld файла
+        let container = NSPersistentContainer(name: "ToDoList")
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
