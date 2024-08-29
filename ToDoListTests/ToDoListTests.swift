@@ -8,29 +8,41 @@
 import XCTest
 @testable import ToDoList
 
-final class ToDoListTests: XCTestCase {
+class TodoJSONParsingTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    var todoResponse: TodoResponse?
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    override func setUp() {
+        super.setUp()
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        // Загрузка JSON данных из файла в тестовом бандле
+        if let url = Bundle(for: type(of: self)).url(forResource: "todos", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                todoResponse = try decoder.decode(TodoResponse.self, from: data)
+            } catch {
+                XCTFail("Ошибка загрузки JSON: \(error.localizedDescription)")
+            }
+        } else {
+            XCTFail("Файл todos.json не найден")
         }
     }
 
+    func testJSONParsing() {
+        XCTAssertNotNil(todoResponse, "Не удалось распарсить JSON")
+
+        if let todos = todoResponse?.todos {
+            XCTAssertEqual(todos.count, 30, "Количество задач должно быть 30")
+            let firstTodo = todos.first
+            XCTAssertEqual(firstTodo?.id, 1, "Первый ID должен быть 1")
+            XCTAssertEqual(firstTodo?.todo, "Do something nice for someone you care about", "Текст первой задачи некорректен")
+            XCTAssertEqual(firstTodo?.completed, false, "Статус выполнения первой задачи некорректен")
+        }
+    }
+
+    override func tearDown() {
+        todoResponse = nil
+        super.tearDown()
+    }
 }

@@ -15,8 +15,7 @@ class TaskListInteractor: TaskListInteractorProtocol {
     // MARK: - Fetch Tasks
     func fetchTasks() {
         let hasLoadedData = UserDefaults.standard.bool(forKey: "hasLoadedData")
-        print("Has loaded data from API: \(hasLoadedData)")
-
+        
         if !hasLoadedData {
             loadTasksFromAPI()
         } else {

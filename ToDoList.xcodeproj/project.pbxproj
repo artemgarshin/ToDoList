@@ -33,6 +33,7 @@
 		0FFCF9A72C7DD79500146494 /* AddTaskModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9A62C7DD79500146494 /* AddTaskModuleBuilder.swift */; };
 		0FFCF9B12C80AC6D00146494 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9B02C80AC6D00146494 /* CoreDataStack.swift */; };
 		0FFCF9B52C80DF2000146494 /* AddTaskViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFCF9B42C80DF2000146494 /* AddTaskViewController+Setup.swift */; };
+		0FFCF9B72C81279700146494 /* todos.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FFCF9B62C81279700146494 /* todos.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		0FFCF9A62C7DD79500146494 /* AddTaskModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskModuleBuilder.swift; sourceTree = "<group>"; };
 		0FFCF9B02C80AC6D00146494 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0FFCF9B42C80DF2000146494 /* AddTaskViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddTaskViewController+Setup.swift"; sourceTree = "<group>"; };
+		0FFCF9B62C81279700146494 /* todos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = todos.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 		0FFCF9662C7D12E200146494 /* ToDoListTests */ = {
 			isa = PBXGroup;
 			children = (
+				0FFCF9B62C81279700146494 /* todos.json */,
 				0FFCF9672C7D12E200146494 /* ToDoListTests.swift */,
 			);
 			path = ToDoListTests;
@@ -363,6 +366,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFCF9B72C81279700146494 /* todos.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
