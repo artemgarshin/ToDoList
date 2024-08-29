@@ -12,8 +12,8 @@ protocol AddTaskInteractorOutputProtocol: AnyObject {
 }
 
 protocol AddTaskPresenterProtocol: AnyObject {
-    func saveTask(title: String, description: String)
-    func updateTask(_ task: Task, title: String, description: String)
+    func saveTask(title: String, description: String?)
+    func updateTask(_ task: Task, title: String, description: String?)
     func handleInvalidInput()
 }
 
@@ -22,12 +22,12 @@ class AddTaskPresenter: AddTaskPresenterProtocol {
     var interactor: AddTaskInteractorProtocol!
     var router: AddTaskRouterProtocol!
 
-    func saveTask(title: String, description: String) {
+    func saveTask(title: String, description: String?) {
         let task = Task(id: UUID(), title: title, description: description, dateCreated: Date(), isCompleted: false)
         interactor.saveTask(task)
     }
 
-    func updateTask(_ task: Task, title: String, description: String) {
+    func updateTask(_ task: Task, title: String, description: String?) {
         var updatedTask = task
         updatedTask.title = title
         updatedTask.description = description

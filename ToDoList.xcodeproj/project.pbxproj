@@ -129,7 +129,6 @@
 		0FFCF94C2C7D12E100146494 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				0FFCF99D2C7DD71400146494 /* New Group */,
 				0FFCF94D2C7D12E100146494 /* AppDelegate.swift */,
 				0FFCF94F2C7D12E100146494 /* SceneDelegate.swift */,
 				0FFCF99B2C7D19ED00146494 /* TaskList */,
@@ -227,13 +226,6 @@
 				0FFCF9A62C7DD79500146494 /* AddTaskModuleBuilder.swift */,
 			);
 			path = AddTask;
-			sourceTree = "<group>";
-		};
-		0FFCF99D2C7DD71400146494 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

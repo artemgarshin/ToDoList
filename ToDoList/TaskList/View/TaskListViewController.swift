@@ -48,6 +48,28 @@ class TaskListViewController: UIViewController, TaskListViewProtocol {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
+    private func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: date)
+    }
+    
+    @objc private func toggleTaskCompletion(_ sender: UIButton) {
+        let taskIndex = sender.tag
+        var task = tasks[taskIndex]
+        
+        // Переключение статуса выполнения
+        task.isCompleted.toggle()
+        
+        // Обновление задачи в массиве и перезагрузка таблицы
+        tasks[taskIndex] = task
+        tableView.reloadData()
+        
+        // Обновление задачи через Interactor
+        presenter.didTapEditTask(task)
+    }
 }
 
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -59,12 +81,25 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "TaskCell")
         
         let task = tasks[indexPath.row]
-        
+
+        // Настройка основного текста и даты
         cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = task.isCompleted ? "Completed" : "Not Completed"
+        cell.detailTextLabel?.text = formatDate(task.dateCreated)
+
+        // Переиспользование или создание чекбокса
+        let checkBox: UIButton
+        if let existingCheckBox = cell.accessoryView as? UIButton {
+            checkBox = existingCheckBox
+        } else {
+            checkBox = UIButton(type: .system)
+            checkBox.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            cell.accessoryView = checkBox
+        }
         
-        // Установка цвета фона для ячейки
-        cell.backgroundColor = .white
+        // Настройка чекбокса
+        checkBox.setTitle(task.isCompleted ? "☑️" : "⬜️", for: .normal)
+        checkBox.addTarget(self, action: #selector(toggleTaskCompletion(_:)), for: .touchUpInside)
+        checkBox.tag = indexPath.row // Сохраняем индекс задачи в тэге кнопки
         
         return cell
     }

@@ -14,17 +14,21 @@ class TaskListRouter: TaskListRouterProtocol {
     func navigateToTaskDetail(with task: Task) {
         guard let interactor = interactor else { return }
         let addTaskViewController = AddTaskModuleBuilder.build(with: interactor)
-        if var addTaskVC = addTaskViewController as? AddTaskViewController {
+        if let addTaskVC = addTaskViewController as? AddTaskViewController {
             addTaskVC.taskToEdit = task
         }
-        viewController?.navigationController?.pushViewController(addTaskViewController, animated: true)
+        
+        // Презентация модального экрана
+        addTaskViewController.modalPresentationStyle = .formSheet
+        viewController?.present(addTaskViewController, animated: true, completion: nil)
     }
-
-
 
     func navigateToAddTask() {
         guard let interactor = interactor else { return }
         let addTaskViewController = AddTaskModuleBuilder.build(with: interactor)
-        viewController?.navigationController?.pushViewController(addTaskViewController, animated: true)
+        
+        // Презентация модального экрана
+        addTaskViewController.modalPresentationStyle = .formSheet
+        viewController?.present(addTaskViewController, animated: true, completion: nil)
     }
 }

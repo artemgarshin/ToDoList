@@ -7,27 +7,53 @@
 
 import Foundation
 
+import Foundation
+
 class TaskListInteractor: TaskListInteractorProtocol {
     weak var presenter: TaskListInteractorOutputProtocol?
     private var tasks: [Task] = []
 
     func fetchTasks() {
-        // Выполнение загрузки задач на фоне
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            // Эмуляция загрузки данных, например, из базы данных
-            self?.presenter?.didFetchTasks(self?.tasks ?? [])
+        if tasks.isEmpty {
+            loadTasksFromAPI()
+        } else {
+            presenter?.didFetchTasks(tasks)
         }
     }
 
-    func addTask(_ task: Task) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.tasks.append(task)
+    private func loadTasksFromAPI() {
+        guard let url = URL(string: "https://dummyjson.com/todos") else {
+            return
+        }
 
-            // Возвращение на главный поток для обновления UI
-            DispatchQueue.main.async {
-                self?.presenter?.didUpdateTasks(self?.tasks ?? [])
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let data = data, error == nil else {
+                // Обработка ошибки
+                return
+            }
+
+            do {
+                let todoResponse = try JSONDecoder().decode(TodoResponse.self, from: data)
+                
+                // Конвертация `Todo` в `Task`
+                self?.tasks = todoResponse.todos.map { todo in
+                    Task(id: UUID(), title: todo.todo, description: "", dateCreated: Date(), isCompleted: todo.completed)
+                }
+
+                DispatchQueue.main.async {
+                    self?.presenter?.didFetchTasks(self?.tasks ?? [])
+                }
+            } catch {
+                print("Ошибка декодирования данных: \(error)")
             }
         }
+
+        task.resume()
+    }
+
+    func addTask(_ task: Task) {
+        tasks.append(task)
+        presenter?.didUpdateTasks(tasks)
     }
 
     func updateTask(_ task: Task) {
@@ -43,12 +69,7 @@ class TaskListInteractor: TaskListInteractorProtocol {
     }
 
     func deleteTask(_ task: Task) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.tasks.removeAll { $0.id == task.id }
-
-            DispatchQueue.main.async {
-                self?.presenter?.didUpdateTasks(self?.tasks ?? [])
-            }
-        }
+        tasks.removeAll { $0.id == task.id }
+        presenter?.didUpdateTasks(tasks)
     }
 }

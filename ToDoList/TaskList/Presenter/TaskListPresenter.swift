@@ -43,6 +43,8 @@ extension TaskListPresenter: TaskListInteractorOutputProtocol {
     }
 
     func didUpdateTasks(_ tasks: [Task]) {
-        view?.showTasks(tasks)
+        DispatchQueue.main.async {
+            self.view?.showTasks(tasks)
+        }
     }
 }
